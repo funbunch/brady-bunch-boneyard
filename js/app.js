@@ -1,11 +1,12 @@
 window.addEventListener("DOMContentLoaded", () => {
 
 //set up DOM elements  
-const canvas = document.querySelector('canvas');
+const canvas = document.querySelector('canvas')
 const movementDisplay = document.getElementById('movement')
+const score = document.getElementById('score')
 
 // canvas setup / game state
-const c = canvas.getContext('2d');
+const c = canvas.getContext('2d')
 
 canvas.width = 1000;
 canvas.height = 500;
@@ -51,6 +52,7 @@ class Dog {
 let brady = new Dog(200, 300, 'yellow', 60, 120)
 let goodBone = new Bone(400, 200, 'white', 20, 40)
 let bones = []
+let bonesCollected = 0
 
 function createRandomBones() {
   const randomY =  Math.floor(Math.random() * 500)
@@ -85,9 +87,16 @@ function detectBoneCollection(currentBone) {
        //bottom
        brady.y <= currentBone.y + currentBone.height 
      )  {
-        console.log('hit')
+        // console.log('hit')
+        //increment bonecollected
+        bonesCollected++
+        console.log(bonesCollected)
         //endGame() 
      }
+}
+
+function displayScore() {
+  score.innerText = `Score: ${bonesCollected}`
 }
 
 function endGame() {
@@ -103,6 +112,7 @@ function gameLoop() {
   createRandomBones()
   // goodBone.render()
   brady.render()
+  displayScore()
 }
 
 //list for keypress
