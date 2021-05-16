@@ -55,11 +55,12 @@ let bones = []
 function createRandomBones() {
   const randomY =  Math.floor(Math.random() * 500)
   // console.log(randomY)
-
-  const randomX =  Math.floor(Math.random() * 1000);
+  // Math.random() * (max - min) + min;
+  const randomX =  Math.floor(Math.random() * (1500 - 1000) + 1000);
   // console.log(randomX)
-  if (bones.length < 3) {
-    bones.push(new Bone(randomX, randomY, 'white', 20, 40))
+  // first time 4 bones each time after is 1 less
+  if (bones.length < 4) {
+    bones.push(new Bone(randomX, randomY - 40, 'white', 20, 40))
   } 
 
   bones.forEach((bone, index ) => {
@@ -67,25 +68,20 @@ function createRandomBones() {
     bone.x -= 10
     if (bone.x < -5) {
       bones.splice(1, index)
-      console.log(bones)
     }
-    if (bone) {
-      //collision detect
-      detectBoneCollection(bone)
-    }
-    
+    //collision detect
+    detectBoneCollection(bone)
   })
 }
 
 function detectBoneCollection(currentBone) {
-  console.log(typeof currentBone)
   if (
        //left
-       brady.x + brady.width >= currentBone.x &&
+       brady.x + brady.width > currentBone.x &&
        // right 
        brady.x <= currentBone.x + currentBone.width &&
        //top
-       brady.y + brady.height >= currentBone.y && 
+       brady.y + brady.height > currentBone.y && 
        //bottom
        brady.y <= currentBone.y + currentBone.height 
      )  {
@@ -111,6 +107,7 @@ function gameLoop() {
 
 //list for keypress
 function movementHandler(e) {
+  e.preventDefault()
   const position = 10
   movementDisplay.innerText = `X: ${brady.x} Y: ${brady.y}`
   switch (e.keyCode) {
