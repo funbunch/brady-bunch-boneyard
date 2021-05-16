@@ -10,7 +10,7 @@ const c = canvas.getContext('2d');
 canvas.width = 1000;
 canvas.height = 500;
 
-let gameLoopInterval = setInterval(gameLoop, 60)
+let gameLoopInterval = setInterval(gameLoop, 65)
 
 function drawBox(x, y, size, color) {
   c.fillStyle = color
@@ -50,36 +50,62 @@ class Dog {
 
 let brady = new Dog(200, 300, 'yellow', 60, 120)
 let goodBone = new Bone(400, 200, 'white', 20, 40)
+let bones = []
 
-// function dectectBoneCollection() {
-//   if (
-//        //left
-//        brady.x + brady.width >= bone.x &&
-//        // right 
-//        brady.x <= bone.x + bone.width &&
-//        //top
-//        brady.y + brady.height >= bone.y && 
-//        //bottom
-//        brady.y <= bone.y + bone.height 
-//      )  {
-//         //console.log('hit')
-//         //endGame() 
-//      }
-// }
+function createRandomBones() {
+  const randomY =  Math.floor(Math.random() * 500)
+  // console.log(randomY)
 
-// function endGame() {
-//   //ogre.alive = false
-//   clearInterval(gameLoopInterval)
-//   movementDisplay.innerText = "You collected all the bones!!" 
+  const randomX =  Math.floor(Math.random() * 1000);
+  // console.log(randomX)
+  if (bones.length < 3) {
+    bones.push(new Bone(randomX, randomY, 'white', 20, 40))
+  } 
 
-// }
+  bones.forEach((bone, index ) => {
+    bone.render()
+    bone.x -= 10
+    if (bone.x < -5) {
+      bones.splice(1, index)
+      console.log(bones)
+    }
+    if (bone) {
+      //collision detect
+      detectBoneCollection(bone)
+    }
+    
+  })
+}
 
+function detectBoneCollection(currentBone) {
+  console.log(typeof currentBone)
+  if (
+       //left
+       brady.x + brady.width >= currentBone.x &&
+       // right 
+       brady.x <= currentBone.x + currentBone.width &&
+       //top
+       brady.y + brady.height >= currentBone.y && 
+       //bottom
+       brady.y <= currentBone.y + currentBone.height 
+     )  {
+        console.log('hit')
+        //endGame() 
+     }
+}
+
+function endGame() {
+  //ogre.alive = false
+  clearInterval(gameLoopInterval)
+  movementDisplay.innerText = "You collected all the bones!!" 
+ }
 
 //Game Functions
 function gameLoop() {
   // Clear the canvas
   c.clearRect(0, 0, canvas.width, canvas.height)
-  goodBone.render()
+  createRandomBones()
+  // goodBone.render()
   brady.render()
 }
 
@@ -106,11 +132,11 @@ function movementHandler(e) {
 
 
 // event listerners
-canvas.addEventListener('click', e => {
-  console.log(e)
-  // drawBox(e.offsetX, e.offsetY, 50, 50, 'yellow')
-  //movementDisplay.innerText = `X: ${e.offsetX} Y: ${e.offsetY}`
-})
+// canvas.addEventListener('click', e => {
+//   console.log(e)
+//   // drawBox(e.offsetX, e.offsetY, 50, 50, 'yellow')
+//   //movementDisplay.innerText = `X: ${e.offsetX} Y: ${e.offsetY}`
+// })
 
 document.addEventListener('keydown', movementHandler)
 
