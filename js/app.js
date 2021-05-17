@@ -11,7 +11,7 @@ const c = canvas.getContext('2d')
 canvas.width = 1000;
 canvas.height = 500;
 
-let gameLoopInterval = setInterval(gameLoop, 65)
+let gameLoopInterval = setInterval(gameLoop, 100)
 
 function drawBox(x, y, size, color) {
   c.fillStyle = color
@@ -41,7 +41,7 @@ class Dog {
       this.color = color
       this.width = width
       this.height = height
-      //this.alive = true
+      this.hit = false    
     }
     render() {
       c.fillStyle = this.color
@@ -62,7 +62,7 @@ function createRandomBones() {
   // console.log(randomX)
   // first time 4 bones each time after is 1 less
   if (bones.length < 4) {
-    bones.push(new Bone(randomX, randomY - 40, 'white', 20, 40))
+    bones.push(new Bone(randomX, randomY - 40, 'white', 20, 40, false))
   } 
 
   bones.forEach((bone, index ) => {
@@ -85,12 +85,13 @@ function detectBoneCollection(currentBone) {
        //top
        brady.y + brady.height > currentBone.y && 
        //bottom
-       brady.y <= currentBone.y + currentBone.height 
+       brady.y <= currentBone.y + currentBone.height &&
+       currentBone.hit === false
      )  {
-        // console.log('hit')
         //increment bonecollected
+        currentBone.hit = true
         bonesCollected++
-        console.log(bonesCollected)
+        // console.log(bonesCollected)
         //endGame() 
      }
 }
