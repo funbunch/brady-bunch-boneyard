@@ -90,8 +90,8 @@ function detectBoneCollection(currentBone) {
      )  {
         //increment bonecollected
         currentBone.hit = true
+        currentBone.color = 'transparent' 
         bonesCollected++
-        // console.log(bonesCollected)
         //endGame() 
      }
 }
