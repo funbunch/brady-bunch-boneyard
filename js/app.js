@@ -100,7 +100,6 @@ function displayScore() {
 }
 
 function endGame() {
-  //ogre.alive = false
   clearInterval(gameLoopInterval)
   movementDisplay.innerText = "You collected all the bones!!" 
  }
@@ -121,15 +120,26 @@ function movementHandler(e) {
   const position = 10
   movementDisplay.innerText = `X: ${brady.x} Y: ${brady.y}`
   switch (e.keyCode) {
+    //up
     case (38):
-    brady.y -= position 
+    //if checks to prevent going off canvas  
+    if (brady.y - position > 0) {
+      brady.y -= position 
+    }
     break
+    //down
     case (40):
-    brady.y += position 
+    if (brady.y + brady.height + position < canvas.height) {
+      brady.y += position 
+    }
     break
+    //left
     case (37):
-    brady.x -= position 
+    if (brady.x - position > 0) {
+      brady.x -= position
+    } 
     break
+    //right
     case (39):
     brady.x += position 
     break
