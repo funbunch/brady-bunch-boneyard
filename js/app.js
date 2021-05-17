@@ -4,6 +4,7 @@ window.addEventListener("DOMContentLoaded", () => {
 const canvas = document.querySelector('canvas')
 const movementDisplay = document.getElementById('movement')
 const score = document.getElementById('score')
+let timer = document.getElementById('timer')
 
 // canvas setup / game state
 const c = canvas.getContext('2d')
@@ -11,7 +12,18 @@ const c = canvas.getContext('2d')
 canvas.width = 1000;
 canvas.height = 500;
 
+//timing vars
 let gameLoopInterval = setInterval(gameLoop, 100)
+let startTime = 30
+
+//set up var to be able to clear countdown
+let countdown = setInterval(countDownFunc, 1000)
+function countDownFunc() {
+  startTime--
+  if(startTime <= 0) {
+     clearInterval(countdown)
+  }
+}
 
 function drawBox(x, y, size, color) {
   c.fillStyle = color
@@ -99,6 +111,9 @@ function detectBoneCollection(currentBone) {
 function displayScore() {
   score.innerText = `Score: ${bonesCollected}`
 }
+function displayTimer() {
+  timer.innerText = `Timer: ${startTime}`
+}
 
 function endGame() {
   clearInterval(gameLoopInterval)
@@ -113,6 +128,7 @@ function gameLoop() {
   // goodBone.render()
   brady.render()
   displayScore()
+  displayTimer()
 }
 
 //list for keypress
