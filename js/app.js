@@ -38,7 +38,6 @@ class Dog {
     this.color = color
     this.width = width
     this.height = height
-    //this.alive = true
   }
   render() {
     c.fillStyle = this.color
@@ -102,9 +101,12 @@ function detectBoneCollection(currentBone) {
      )  {
         //increment bonecollected
         currentBone.hit = true
+        //loop through array of bones at whatever index remove from array
+        for (let i = 0; i < bones.length; i++) {
+          
+        }
         currentBone.color = 'transparent' 
         bonesCollected++
-        //endGame() 
      }
 }
 
@@ -115,17 +117,26 @@ function displayTimer() {
   timer.innerText = `Timer: ${startTime}`
 }
 
-function endGame() {
+function winGame() {
   clearInterval(gameLoopInterval)
   movementDisplay.innerText = "You collected all the bones!!" 
+ }
+ function loseGame() {
+  clearInterval(gameLoopInterval)
+  movementDisplay.innerText = "Try again next time" 
  }
 
 //Game Functions
 function gameLoop() {
   // Clear the canvas
   c.clearRect(0, 0, canvas.width, canvas.height)
+  if (bonesCollected === 10 && startTime >= 0) {
+    winGame() 
+  } else if (bonesCollected < 10 && startTime <= 0 ) {
+   loseGame()
+  }
+    
   createRandomBones()
-  // goodBone.render()
   brady.render()
   displayScore()
   displayTimer()
@@ -135,11 +146,11 @@ function gameLoop() {
 function movementHandler(e) {
   e.preventDefault()
   const position = 10
-  movementDisplay.innerText = `X: ${brady.x} Y: ${brady.y}`
+  // movementDisplay.innerText = `X: ${brady.x} Y: ${brady.y}`
   switch (e.keyCode) {
     //up
     case (38):
-    //if checks to prevent going off canvas  
+    //if checks to prevent dog going off canvas  
     if (brady.y - position > 0) {
       brady.y -= position 
     }
@@ -162,15 +173,6 @@ function movementHandler(e) {
     break
   }
 }
-
-
-
-// event listerners
-// canvas.addEventListener('click', e => {
-//   console.log(e)
-//   // drawBox(e.offsetX, e.offsetY, 50, 50, 'yellow')
-//   //movementDisplay.innerText = `X: ${e.offsetX} Y: ${e.offsetY}`
-// })
 
 document.addEventListener('keydown', movementHandler)
 
