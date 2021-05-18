@@ -11,7 +11,7 @@ let timer = document.getElementById('timer')
 // canvas setup / game state
 const c = canvas.getContext('2d')
 
-canvas.width = 1000;
+canvas.width = 714;
 canvas.height = 500;
 
 //timing vars

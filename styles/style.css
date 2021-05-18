@@ -20,9 +20,9 @@ body {
 canvas {
   border: 2px solid #000;
   background: green;
-  background:url(../imgs/bg-1-field.jpg) repeat-x 0 / 100% auto;
+  background:url(../imgs/cute-edit3.jpg) repeat-x 0 / 100% auto;
   animation: ani 5s linear infinite;
-  width: 1000px;
+  width: 714px;
   height: 500px;
 }
 h1 {
