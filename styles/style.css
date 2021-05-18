@@ -12,9 +12,18 @@ body {
   margin: 0 auto;
   text-align: center;
 }
+@keyframes ani{
+	0%{background-position: 100vw 0;}
+	100%{background-position: 0 0;}
+}
+
 canvas {
   border: 2px solid #000;
   background: green;
+  background:url(../imgs/bg-1-field.jpg) repeat-x 0 / 100% auto;
+  animation: ani 5s linear infinite;
+  width: 1000px;
+  height: 500px;
 }
 h1 {
   font-family: 'Boogaloo', cursive;
@@ -33,3 +42,7 @@ h2 {
 #restartGame { 
   display: none;
 }
+/* #movement {
+  background:url(../imgs/bg-1-field.jpg) repeat-x 0 / 100% auto;
+  width: 100%;
+} */
