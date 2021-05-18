@@ -14,6 +14,17 @@ const c = canvas.getContext('2d')
 canvas.width = 714;
 canvas.height = 500;
 
+//create img elements
+function setObjects() {
+dogImg = new Image()
+dogImg.src = 'imgs/dog-1@2x.png'
+dogImg.onload = () => {
+  c.drawImage(dogImg, 200, 350);  
+  }
+}
+
+
+
 //timing vars
 let gameLoopInterval = setInterval(gameLoop, 75)
 let startTime = 40
@@ -174,7 +185,7 @@ function gameLoop() {
   } else if (bonesCollected < 10 && startTime <= 0 ) {
    loseGame()
   }
-    
+  setObjects()  
   createRandomBones()
   createRandomBadBones()
   brady.render()
