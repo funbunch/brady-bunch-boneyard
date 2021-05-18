@@ -63,10 +63,10 @@ class Bone {
   }
 
 let brady = new Dog(200, 300, 'yellow', 60, 120)
-let goodBone = new Bone(400, 200, 'white', 20, 40)
 let bones = []
 let badBones = []
 let bonesCollected = 0
+// let badBonesCollected = 0 
 
 function createRandomBones() {
   const randomY =  Math.floor(Math.random() * 500)
@@ -99,9 +99,9 @@ function createRandomBadBones() {
   // Math.random() * (max - min) + min;
   const randomX =  Math.floor(Math.random() * (1500 - 1000) + 1000);
   // console.log(randomX)
-  // first time 4 bones each time after is 1 less
+  // first time 3 bones each time after is 1 less
   if (badBones.length < 3) {
-    badBones.push(new badBone(randomX, randomY - 40, 'brown', 20, 40, false))
+    badBones.push(new Bone(randomX, randomY - 40, 'brown', 20, 40, false))
   } 
 
   badBones.forEach((badBone, index ) => {
@@ -115,7 +115,6 @@ function createRandomBadBones() {
     detectBoneCollection(badBone)
   })
 }
-
 
 function detectBoneCollection(currentBone) {
   if (
@@ -132,7 +131,6 @@ function detectBoneCollection(currentBone) {
         //increment bonecollected
         currentBone.hit = true
         //loop through array of bones at whatever index remove from array
-        //TODO
         // for (let i = 0; i < bones.length; i++) {
         //   if (bones[i] === true) {
         //     bones.splice(i)
@@ -141,9 +139,12 @@ function detectBoneCollection(currentBone) {
          
         //   //console.log(bones[i])  
         // }
-        // currentBone.color = 'transparent' 
-        bonesCollected++
-     }
+       if (currentBone.color === 'white') {
+         bonesCollected++
+       } else if (bonesCollected > 0) {
+        bonesCollected--
+       }
+      }  
 }
 
 function displayScore() {
@@ -175,7 +176,7 @@ function gameLoop() {
   }
     
   createRandomBones()
-  // createRandomBadBones()
+  createRandomBadBones()
   brady.render()
   displayScore()
   displayTimer()
