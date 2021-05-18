@@ -178,7 +178,7 @@ function movementHandler(e) {
   }
 }
 
-// document.addEventListener('click', )
+playAgain.addEventListener('click', gameLoop())
 
 document.addEventListener('keydown', movementHandler)
 
