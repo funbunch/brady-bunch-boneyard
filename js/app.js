@@ -2,9 +2,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
 //set up DOM elements  
 const canvas = document.querySelector('canvas')
-const movementDisplay = document.getElementById('movement')
+const gameStatusDisplay = document.getElementById('movement')
 const score = document.getElementById('score')
+const playAgain = document.getElementById('restartGame')
 let timer = document.getElementById('timer')
+
 
 // canvas setup / game state
 const c = canvas.getContext('2d')
@@ -119,11 +121,11 @@ function displayTimer() {
 
 function winGame() {
   clearInterval(gameLoopInterval)
-  movementDisplay.innerText = "You collected all the bones!!" 
+  gameStatusDisplay.innerText = "You collected all the bones!!" 
  }
  function loseGame() {
   clearInterval(gameLoopInterval)
-  movementDisplay.innerText = "Try again next time" 
+  gameStatusDisplay.innerText = "Try again next time." 
  }
 
 //Game Functions
@@ -173,6 +175,8 @@ function movementHandler(e) {
     break
   }
 }
+
+document.addEventListener('click', )
 
 document.addEventListener('keydown', movementHandler)
 
