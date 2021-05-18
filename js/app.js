@@ -122,10 +122,12 @@ function displayTimer() {
 function winGame() {
   clearInterval(gameLoopInterval)
   gameStatusDisplay.innerText = "You collected all the bones!!" 
+  playAgain.style.display = "block"
  }
  function loseGame() {
   clearInterval(gameLoopInterval)
   gameStatusDisplay.innerText = "Try again next time." 
+  playAgain.style.display = "block"
  }
 
 //Game Functions
@@ -176,7 +178,7 @@ function movementHandler(e) {
   }
 }
 
-document.addEventListener('click', )
+// document.addEventListener('click', )
 
 document.addEventListener('keydown', movementHandler)
 

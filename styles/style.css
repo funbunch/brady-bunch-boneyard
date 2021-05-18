@@ -30,3 +30,6 @@ h2 {
   height: 100vh;
   background-color: green;
 }
+#restartGame { 
+  display: none;
+}
