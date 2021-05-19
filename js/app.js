@@ -14,17 +14,6 @@ const c = canvas.getContext('2d')
 canvas.width = 714;
 canvas.height = 500;
 
-//create img elements
-function setObjects() {
-dogImg = new Image()
-dogImg.src = 'imgs/dog-1@2x.png'
-dogImg.onload = () => {
-  c.drawImage(dogImg, 200, 350);  
-  }
-}
-
-
-
 //timing vars
 let gameLoopInterval = setInterval(gameLoop, 75)
 let startTime = 40
@@ -45,49 +34,58 @@ function drawBox(x, y, size, color) {
 
 // Class characters
 class Dog {
-  constructor(x, y, color, width, height) {
+  constructor(x, y, width, height,imgSrc) {
     this.x = x
     this.y = y
-    this.color = color
+    this.img = new Image()
+    this.imgSrc = imgSrc
     this.width = width
     this.height = height
   }
   render() {
-    c.fillStyle = this.color
-    c.fillRect(this.x, this.y, this.width, this.height)
+    this.img.src = this.imgSrc
+    c.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
   }
 
 class Bone {
-  constructor(x, y, color, width, height) {
+  constructor(x, y, width, height, imgSrc, good) {
     this.x = x
     this.y = y
-    this.color = color
+    this.img = new Image()
+    this.imgSrc = imgSrc
     this.width = width
     this.height = height
-    this.hit = false    
+    this.hit = false
+    this.good = good    
   }
   render() {
-    c.fillStyle = this.color
-    c.fillRect(this.x, this.y, this.width, this.height)
+    this.img.src = this.imgSrc
+    c.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
+    //getRandomImg array of imgs, pick random #, this.imgSrc    
+  getRandomImg(){
+    this.imgSrc
+  }  
+
   }
 
-let brady = new Dog(200, 300, 'yellow', 60, 120)
+let brady = new Dog(200, 350, 146, 113, 'imgs/dog-1@2x.png')
 let bones = []
 let badBones = []
 let bonesCollected = 0
-// let badBonesCollected = 0 
 
 function createRandomBones() {
-  const randomY =  Math.floor(Math.random() * 500)
+  const randomY =  Math.floor(Math.random() * (500-300) + 300)
   // console.log(randomY)
   // Math.random() * (max - min) + min;
-  const randomX =  Math.floor(Math.random() * (1500 - 1000) + 1000);
+  const randomX =  Math.floor(Math.random() * (1500 - 714) + 714)
   // console.log(randomX)
   // first time 4 bones each time after is 1 less
   if (bones.length < 4) {
-    bones.push(new Bone(randomX, randomY - 40, 'white', 20, 40, false))
+    bones.push(new Bone(randomX, randomY - 40, 50, 48, 'imgs/bone-1@2x.png', true))
+    console.log(randomY)
+    // 
   } 
 
   bones.forEach((bone, index ) => {
@@ -105,25 +103,26 @@ function createRandomBones() {
 }
 
 function createRandomBadBones() {
-  const randomY =  Math.floor(Math.random() * 500)
+  const randomY =  Math.floor(Math.random() * (500-250) + 250)
   // console.log(randomY)
   // Math.random() * (max - min) + min;
   const randomX =  Math.floor(Math.random() * (1500 - 1000) + 1000);
   // console.log(randomX)
   // first time 3 bones each time after is 1 less
-  if (badBones.length < 3) {
-    badBones.push(new Bone(randomX, randomY - 40, 'brown', 20, 40, false))
+  if (badBones.length < 2) {
+    badBones.push(new Bone(randomX, randomY - 40, 50, 47, 'imgs/chicken-bone.png', false))
   } 
 
   badBones.forEach((badBone, index ) => {
-
-    badBone.render()
-    badBone.x -= 10
-    if (badBone.x < -5) {
-      badBones.splice(1, index)
+    if (badBone.hit === false) {
+      badBone.render()
+      badBone.x -= 10
+      if (badBone.x < -5) {
+        badBones.splice(1, index)
+      }
+      //collision detect
+      detectBoneCollection(badBone)
     }
-    //collision detect
-    detectBoneCollection(badBone)
   })
 }
 
@@ -150,7 +149,7 @@ function detectBoneCollection(currentBone) {
          
         //   //console.log(bones[i])  
         // }
-       if (currentBone.color === 'white') {
+       if (currentBone.good === true ) {
          bonesCollected++
        } else if (bonesCollected > 0) {
         bonesCollected--
@@ -185,7 +184,6 @@ function gameLoop() {
   } else if (bonesCollected < 10 && startTime <= 0 ) {
    loseGame()
   }
-  setObjects()  
   createRandomBones()
   createRandomBadBones()
   brady.render()
