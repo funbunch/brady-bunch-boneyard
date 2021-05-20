@@ -6,6 +6,7 @@ const gameStatusDisplay = document.getElementById('movement')
 const score = document.getElementById('score')
 const playAgain = document.getElementById('restartGame')
 let timer = document.getElementById('timer')
+const boneImgs = ['imgs/bone-1@2x.png','imgs/bone-2@2x.png','imgs/bone-3@2x.png']
 
 
 // canvas setup / game state
@@ -25,11 +26,6 @@ function countDownFunc() {
   if(startTime <= 0) {
      clearInterval(countdown)
   }
-}
-
-function drawBox(x, y, size, color) {
-  c.fillStyle = color
-  c.fillRect(x, y, size, size);
 }
 
 // Class characters
@@ -63,29 +59,28 @@ class Bone {
     this.img.src = this.imgSrc
     c.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
-    //getRandomImg array of imgs, pick random #, this.imgSrc    
-  getRandomImg(){
-    this.imgSrc
-  }  
-
   }
 
+  function getRandomImg(arr) {
+    let changingImg = Math.floor(Math.random() * arr.length)
+    return imgSrc = boneImgs[changingImg]
+    }  
+    
 let brady = new Dog(200, 350, 146, 113, 'imgs/dog-1@2x.png')
 let bones = []
 let badBones = []
 let bonesCollected = 0
 
 function createRandomBones() {
-  const randomY =  Math.floor(Math.random() * (500-300) + 300)
+  let randomY =  Math.floor(Math.random() * (500-300) + 300)
   // console.log(randomY)
   // Math.random() * (max - min) + min;
-  const randomX =  Math.floor(Math.random() * (1500 - 714) + 714)
+  let randomX =  Math.floor(Math.random() * (1500 - 714) + 714)
   // console.log(randomX)
   // first time 4 bones each time after is 1 less
-  if (bones.length < 4) {
-    bones.push(new Bone(randomX, randomY - 40, 50, 48, 'imgs/bone-1@2x.png', true))
-    console.log(randomY)
-    // 
+  if (bones.length <= 4) {
+    bones.push(new Bone(randomX, randomY, 50, 48, getRandomImg(boneImgs), true))
+    console.log(bones) 
   } 
 
   bones.forEach((bone, index ) => {
@@ -94,7 +89,7 @@ function createRandomBones() {
       bone.render()
       bone.x -= 10
       if (bone.x < -5) {
-        bones.splice(1, index)
+        bones.splice(index, 1)
       }
       //collision detect
       detectBoneCollection(bone)
@@ -103,10 +98,10 @@ function createRandomBones() {
 }
 
 function createRandomBadBones() {
-  const randomY =  Math.floor(Math.random() * (500-250) + 250)
+  let randomY =  Math.floor(Math.random() * (500-250) + 250)
   // console.log(randomY)
   // Math.random() * (max - min) + min;
-  const randomX =  Math.floor(Math.random() * (1500 - 1000) + 1000);
+  let randomX =  Math.floor(Math.random() * (1500 - 1000) + 1000);
   // console.log(randomX)
   // first time 3 bones each time after is 1 less
   if (badBones.length < 2) {
@@ -118,7 +113,7 @@ function createRandomBadBones() {
       badBone.render()
       badBone.x -= 10
       if (badBone.x < -5) {
-        badBones.splice(1, index)
+        badBones.splice(index, 1)
       }
       //collision detect
       detectBoneCollection(badBone)
@@ -138,6 +133,7 @@ function detectBoneCollection(currentBone) {
        brady.y <= currentBone.y + currentBone.height &&
        currentBone.hit === false
      )  {
+        bones.splice(currentBone, 1)
         //increment bonecollected
         currentBone.hit = true
         //loop through array of bones at whatever index remove from array
