@@ -6,17 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Grandstander:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="./styles/tailwind.css" rel="stylesheet">
   <link rel="stylesheet" href="./styles/style.css">
   <script src="./js/app.js"></script>
   <title>Brady Bunch the Rescue Pup's Boneyard</title>
 </head>
 <body>
-  <h1>Brady Bunch the<br>Rescue Pup's Boneyard</h1>
-  <div class="container">
+  <div class="p-5 ">
+    <h1 class="text-5xl font-he">Brady Bunch the<br>Rescue Pup's Boneyard</h1>
+    <div id="start-screen"></div>
     <div id="movement"></div>
-    <div id="score"></div>
-    <div id="timer"></div>
-    <canvas id="canvas"></canvas>
+    <div class="flex justify-evenly">
+      <div id="score"></div>
+      <div id="timer"></div>
+    </div>
+    <div class="flex flex-col items-center"> 
+      <canvas id="canvas"></canvas>
+    </div>
     <button onclick="window.location.reload()" id="restartGame">Play again</button>
   </div>
   
