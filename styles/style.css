@@ -1,10 +1,14 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 50px;
   color: #000;
   margin: 0;
   text-align: center;
-  background-color: cornflowerblue;
+  background-color: rgb(165, 237, 242)
 
 }
 .container {
@@ -26,10 +30,16 @@ canvas {
   height: 500px;
 }
 h1 {
-  font-family: 'Boogaloo', cursive;
-  font-size: 36px;
-  /* font-family: 'Grandstander', cursive;
-  font-weight: 500; */
+  /* font-family: 'Boogaloo', cursive; */
+  font-family: 'Grandstander', cursive;
+  font-size: 48px;
+  color: rgba(27, 73, 101);
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgba(27, 73, 101);
+  /* color: rgba(27, 73, 101); */
+
+  line-height: 52px;
 }
 h2 {
   font-family: 'Grandstander', cursive;

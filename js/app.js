@@ -7,7 +7,7 @@ const score = document.getElementById('score')
 const playAgain = document.getElementById('restartGame')
 let timer = document.getElementById('timer')
 const boneImgs = ['imgs/bone-1@2x.png','imgs/bone-2@2x.png','imgs/bone-3@2x.png']
-//const badImgs = ['imgs/chicken-bone.png', 'imgs/leaf@2x.png', 'imgs/fries.png']
+const badImgs = ['imgs/chicken-bone.png', 'imgs/leaf@2x.png', 'imgs/fries.png']
 
 
 // canvas setup / game state
@@ -65,14 +65,8 @@ class Bone {
 //set up function to randomize imgs
 function getRandomImg(arr) {
   let changingImg = Math.floor(Math.random() * arr.length)
-  return imgSrc = boneImgs[changingImg]
+  return imgSrc = arr[changingImg]
   }  
-
-// function getRandomImg(arr) {
-//   let changingImg = Math.floor(Math.random() * arr.length)
-//   return imgSrc = badImgs[changingImg]
-//   }  
-  
 
 let brady = new Dog(200, 350, 146, 113, 'imgs/dog-1@2x.png')
 let bones = []
@@ -88,7 +82,6 @@ function createRandomBones() {
   // first time 4 bones each time after is 1 less
   if (bones.length <= 4) {
     bones.push(new Bone(randomX, randomY, 50, 48, getRandomImg(boneImgs), true))
-    console.log(bones) 
   } 
 
   bones.forEach((bone, index ) => {
@@ -113,7 +106,7 @@ function createRandomBadBones() {
   // console.log(randomX)
   // first time 3 bones each time after is 1 less
   if (badBones.length < 2) {
-    badBones.push(new Bone(randomX, randomY - 40, 50, 47, 'imgs/chicken-bone.png', false))
+    badBones.push(new Bone(randomX, randomY - 40, 50, 47, getRandomImg(badImgs), false))
   } 
 
   badBones.forEach((badBone, index ) => {
