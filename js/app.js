@@ -153,7 +153,7 @@ function detectBoneCollection(currentBone) {
         bones.splice(currentBone, 1)
         //increment bonecollected
         currentBone.hit = true
-        eating.play()
+        // eating.play()
         // panting.play()
         //loop through array of bones at whatever index remove from array
         // for (let i = 0; i < bones.length; i++) {
