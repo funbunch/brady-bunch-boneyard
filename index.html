@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Grandstander:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Grandstander:wght@400;500;600;700&family=Poppins&display=swap" rel="stylesheet">
   <link href="./styles/tailwind.css" rel="stylesheet">
   <link rel="stylesheet" href="./styles/style.css">
   <script src="./js/app.js"></script>
@@ -13,17 +13,27 @@
 </head>
 <body>
   <div class="p-5 ">
-    <h1 class="text-5xl font-he">Brady Bunch the<br>Rescue Pup's Boneyard</h1>
-    <div id="start-screen"></div>
-    <div id="movement"></div>
-    <div class="flex justify-evenly">
+    <h1 class="text-5xl pb-1">Brady Bunch the<br>Rescue Pup's Boneyard</h1>
+    <div id="game-stats" class="flex justify-evenly text-3xl py-5">
       <div id="score"></div>
       <div id="timer"></div>
+    </div>
+    <div id="game-status" class="fixed inset-0 flex items-center justify-center text-3xl"></div>
+    <div id="game-intro" class="fixed inset-0 flex items-center justify-center">
+        <div class="modal rounded-lg text-white max-w-lg w-full p-6 text-center">
+          <p class="pb-4">Brady's favorite thing is a good bone. And he loves to run. Help Brady move with the arrow keys to collect as many bones as he can. He also loves to find and chew on objects that aren't great for him. Help him stay away from those.</p>
+          <div>
+            <button class="border-2 transition duration-500 ease-out bg-white py-3 px-8 rounded-lg text-lg" id="start-game">Start Game</button>
+          </div>
+        </div> 
+        <img class="max-w-2xl w-full" id="splash-img" src="imgs/splash-screen.jpg" alt="Start">
     </div>
     <div class="flex flex-col items-center"> 
       <canvas id="canvas"></canvas>
     </div>
-    <button onclick="window.location.reload()" id="restartGame">Play again</button>
+    <div class="flex justify-center pt-6">
+      <button onclick="window.location.reload()" class="border-2 transition duration-500 ease-out bg-white py-3 px-8 rounded-lg text-lg" id="restartGame">Play again</button>
+    </div>
   </div>
   
   <!-- <div class="field"></div>

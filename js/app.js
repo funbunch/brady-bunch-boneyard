@@ -2,13 +2,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
 //set up DOM elements  
 const canvas = document.querySelector('canvas')
-const gameStatusDisplay = document.getElementById('movement')
+const gameStatusDisplay = document.getElementById('game-status')
+const gameIntro = document.getElementById('game-intro')
 const score = document.getElementById('score')
+const stats = document.getElementById('game-stats')
+const startGame = document.getElementById('start-game')
 const playAgain = document.getElementById('restartGame')
 let timer = document.getElementById('timer')
 const boneImgs = ['imgs/bone-1@2x.png','imgs/bone-2@2x.png','imgs/bone-3@2x.png']
 const badImgs = ['imgs/chicken-bone.png', 'imgs/leaf@2x.png', 'imgs/fries.png']
-
 
 // canvas setup / game state
 const c = canvas.getContext('2d')
@@ -18,7 +20,18 @@ canvas.height = 500;
 
 //timing vars
 let gameLoopInterval = setInterval(gameLoop, 75)
-let startTime = 40
+let startTime
+
+
+//start screen 
+startGame.addEventListener('click', () => {
+  //turn game deets on
+  stats.style.display = 'flex'
+  canvas.style.display = 'flex'
+  //turn intro off
+  gameIntro.style.display = 'none'
+  startTime = 30
+})
 
 //set up var to be able to clear countdown
 let countdown = setInterval(countDownFunc, 1000)
@@ -163,11 +176,13 @@ function displayTimer() {
 
 function winGame() {
   clearInterval(gameLoopInterval)
+  gameStatusDisplay.style.display = 'flex'
   gameStatusDisplay.innerText = "You collected all the bones!!" 
   playAgain.style.display = "block"
  }
  function loseGame() {
   clearInterval(gameLoopInterval)
+  gameStatusDisplay.style.display = 'flex'
   gameStatusDisplay.innerText = "Try again next time." 
   playAgain.style.display = "block"
  }
@@ -219,8 +234,6 @@ function movementHandler(e) {
     break
   }
 }
-//TODO
-//playAgain.addEventListener('click', gameLoop())
 
 document.addEventListener('keydown', movementHandler)
 
