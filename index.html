@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" target="_blank">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,8 +18,8 @@
       <div id="score"></div>
       <div id="timer"></div>
     </div>
-    <div id="game-status" class="fixed inset-0 flex items-center justify-center text-3xl"></div>
-    <div id="game-intro" class="fixed inset-0 flex items-center justify-center">
+    <div id="game-status" class="absolute inset-0 flex items-center justify-center text-3xl"></div>
+    <div id="game-intro" class="inset-0 flex items-center justify-center">
         <div class="modal rounded-lg text-white max-w-lg w-full p-6 text-center">
           <p class="pb-4">Brady's favorite thing is a good bone. And he loves to run. Help Brady move with the arrow keys to collect as many bones as he can. He also loves to find and chew on objects that aren't great for him. Help him stay away from those.</p>
           <div>
@@ -35,8 +35,20 @@
       <button onclick="window.location.reload()" class="border-2 transition duration-500 ease-out bg-white py-3 px-8 rounded-lg text-lg" id="restartGame">Play again</button>
     </div>
   </div>
-  
-  <!-- <div class="field"></div>
-  <div class="character">O</div>   -->
+  <div id="credits" class="flex flex-col items-center py-6 text-xs fade-in">
+    <div id="inner-credits" class="p-6 rounded-lg">
+      <p>Credits - Images thanks to Vecteezy</p>
+        <ul>
+          <li><a href="https://www.vecteezy.com/free-vector/vector" target="_blank">Dog Vectors</a></li>
+          <li><a href="https://www.vecteezy.com/free-vector/landscape" target="_blank">Landscape Vectors</a></li>
+          <li><a href="https://www.vecteezy.com/free-vector/chicken-bone" target="_blank">Chicken Bone Vectors</a></li>
+          <li><a href="https://www.vecteezy.com/free-vector/nature" target="_blank">Nature Vectors</a></li>
+          <li><a href="https://www.vecteezy.com/free-vector/french-fries" target="_blank">French Fries Vectors</a></li>
+        </ul>
+        <br>
+      <p>Built by Shannan Bunch<br><a href="https://www.bunchofideas.com" target="_blank">BunchofIdeas</a></p>
+  </div>
+  </div>
+
 </body>
 </html>

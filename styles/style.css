@@ -79,7 +79,28 @@ h2 {
   color: #ffffff;
 }
 
-/* #movement {
-  background:url(../imgs/bg-1-field.jpg) repeat-x 0 / 100% auto;
-  width: 100%;
-} */
+#credits {
+  z-index: 500;
+  display: none;
+}
+.fade-in {
+  animation: fadeIn ease 2s;
+  -webkit-animation: fadeIn ease 2s;
+  -moz-animation: fadeIn ease 2s;
+  -o-animation: fadeIn ease 2s;
+  -ms-animation: fadeIn ease 2s;
+}
+@keyframes fadeIn{
+  0% {
+    opacity:0;
+  }
+  75% {
+    opacity:.75;
+  }
+}
+
+#inner-credits { 
+  width:400px;
+  background: rgba(255, 255, 255, .75);
+  color:#1b4965;
+}

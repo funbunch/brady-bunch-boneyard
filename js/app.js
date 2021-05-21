@@ -8,7 +8,9 @@ const score = document.getElementById('score')
 const stats = document.getElementById('game-stats')
 const startGame = document.getElementById('start-game')
 const playAgain = document.getElementById('restartGame')
+const credits = document.getElementById('credits')
 let timer = document.getElementById('timer')
+let eating = new Audio('assets/sf_dog_medium_barking_02.mp3')
 const boneImgs = ['imgs/bone-1@2x.png','imgs/bone-2@2x.png','imgs/bone-3@2x.png']
 const badImgs = ['imgs/chicken-bone.png', 'imgs/leaf@2x.png', 'imgs/fries.png']
 
@@ -150,6 +152,7 @@ function detectBoneCollection(currentBone) {
         bones.splice(currentBone, 1)
         //increment bonecollected
         currentBone.hit = true
+        // eating.play()
         //loop through array of bones at whatever index remove from array
         // for (let i = 0; i < bones.length; i++) {
         //   if (bones[i] === true) {
@@ -178,12 +181,14 @@ function winGame() {
   clearInterval(gameLoopInterval)
   gameStatusDisplay.style.display = 'flex'
   gameStatusDisplay.innerText = "You collected all the bones!!" 
+  credits.style.display = 'flex'
   playAgain.style.display = "block"
  }
  function loseGame() {
   clearInterval(gameLoopInterval)
   gameStatusDisplay.style.display = 'flex'
   gameStatusDisplay.innerText = "Try again next time." 
+  credits.style.display = 'flex'
   playAgain.style.display = "block"
  }
 
