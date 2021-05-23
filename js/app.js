@@ -8,7 +8,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const startGame = document.getElementById('start-game')
   const playAgain = document.getElementById('restartGame')
   const credits = document.getElementById('credits')
-  const eatingSound = document.getElementById('eatingSound')
   let timer = document.getElementById('timer')
   let eating = new Audio('assets/dog-crunch.mp3')
   let panting = new Audio('assets/panting.mp3')
@@ -37,9 +36,9 @@ window.addEventListener("DOMContentLoaded", () => {
   canvas.width = 714;
   canvas.height = 500;
   //timing vars
-  // let gameLoopInterval = setInterval(gameLoop, 75)
+
   let startTime
-  // console.log(gameLoopInterval)
+
   //start screen 
   startGame.addEventListener('click', () => {
     //turn game deets on
@@ -48,10 +47,10 @@ window.addEventListener("DOMContentLoaded", () => {
     //turn intro off
     gameIntro.style.display = 'none'
     startTime = 30
-    // eatingSound.play()
     setInterval(gameLoop, 75)
     canvas.classList.add('animation')
   })
+
   //set up var to be able to clear countdown
   let countdown = setInterval(countDownFunc, 1000)
   function countDownFunc() {
@@ -161,7 +160,6 @@ window.addEventListener("DOMContentLoaded", () => {
           bones.splice(currentBone, 1)
           //increment bonecollected
           currentBone.hit = true
-          // eating.muted = false
           eating.play()
           //loop through array of bones at whatever index remove from array
           // for (let i = 0; i < bones.length; i++) {
@@ -186,6 +184,8 @@ window.addEventListener("DOMContentLoaded", () => {
   }
   function winGame() {
     gameOver = true
+    canvas.classList.remove('animation')
+    canvas.classList.add('pausedFrame')
     clearInterval(gameLoop)
     bonesCollected = 10
     clearInterval(countdown)
@@ -194,11 +194,11 @@ window.addEventListener("DOMContentLoaded", () => {
     credits.style.display = 'flex'
     playAgain.style.display = "block"
     eating.pause()
-    canvas.classList.add('pausedFrame')
-    canvas.classList.remove('animation')
    }
    function loseGame() {
     gameOver = true
+    canvas.classList.remove('animation')
+    canvas.classList.add('pausedFrame')
     clearInterval(gameLoop)
     clearInterval(countdown)
     gameStatusDisplay.style.display = 'flex'
@@ -206,23 +206,21 @@ window.addEventListener("DOMContentLoaded", () => {
     credits.style.display = 'flex'
     playAgain.style.display = "block"
     eating.pause()
-    canvas.classList.add('pausedFrame')
-    canvas.classList.remove('animation')
+   
    }
    function resetGame() {
+    canvas.classList.remove('animation')
+    canvas.classList.add('pausedFrame')
     gameOver = false
     startTime = 30
     bonesCollected = 0
     eating.pause()
     location.reload()
-    canvas.classList.add('pausedFrame')
-    canvas.classList.remove('animation')
    }
   playAgain.addEventListener('click', resetGame)
-  // startGame.addEventListener('click', gameLoop)
+
   //Game Functions
   function gameLoop() {
-      eatingSound.pause()
       // Clear the canvas
      c.clearRect(0, 0, canvas.width, canvas.height)
      if (bonesCollected === 10 && startTime >= 0) {
@@ -230,9 +228,6 @@ window.addEventListener("DOMContentLoaded", () => {
      } else if (bonesCollected < 10 && startTime <= 0 ) {
       loseGame()
      }
-     // if (eatingSound.play) {
-     //   eatingSound.pause()
-     // }
      createRandomBones()
      createRandomBadBones()
      brady.render()
