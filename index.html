@@ -32,23 +32,28 @@
       <canvas id="canvas"></canvas>
     </div>
     <div class="flex justify-center pt-6">
-      <button onclick="window.location.reload()" class="border-2 transition duration-500 ease-out bg-white py-3 px-8 rounded-lg text-lg" id="restartGame">Play again</button>
+      <button class="border-2 transition duration-500 ease-out bg-white py-3 px-8 rounded-lg text-lg" id="restartGame">Play again</button>
     </div>
   </div>
-  <div id="credits" class="flex flex-col items-center py-6 text-xs fade-in">
-    <div id="inner-credits" class="p-6 rounded-lg">
-      <p>Credits - Images thanks to Vecteezy</p>
-        <ul>
-          <li><a href="https://www.vecteezy.com/free-vector/vector" target="_blank">Dog Vectors</a></li>
-          <li><a href="https://www.vecteezy.com/free-vector/landscape" target="_blank">Landscape Vectors</a></li>
-          <li><a href="https://www.vecteezy.com/free-vector/chicken-bone" target="_blank">Chicken Bone Vectors</a></li>
-          <li><a href="https://www.vecteezy.com/free-vector/nature" target="_blank">Nature Vectors</a></li>
-          <li><a href="https://www.vecteezy.com/free-vector/french-fries" target="_blank">French Fries Vectors</a></li>
-        </ul>
-        <br>
-      <p>Built by Shannan Bunch<br><a href="https://www.bunchofideas.com" target="_blank">BunchofIdeas</a></p>
-  </div>
-  </div>
+  <audio id="eatingSound" controls muted="muted" preload="none" autoplay="">
+    <source src="assets/dog-crunch.mp3" type="audio/mp3">
+  </audio>
+  <footer>
+    <div id="credits" class="flex flex-col items-center py-6 text-xs fade-in">
+      <div id="inner-credits" class="p-6 rounded-lg">
+        <p>Credits - Images thanks to Vecteezy</p>
+          <ul>
+            <li><a href="https://www.vecteezy.com/free-vector/vector" target="_blank">Dog Vectors</a></li>
+            <li><a href="https://www.vecteezy.com/free-vector/landscape" target="_blank">Landscape Vectors</a></li>
+            <li><a href="https://www.vecteezy.com/free-vector/chicken-bone" target="_blank">Chicken Bone Vectors</a></li>
+            <li><a href="https://www.vecteezy.com/free-vector/nature" target="_blank">Nature Vectors</a></li>
+            <li><a href="https://www.vecteezy.com/free-vector/french-fries" target="_blank">French Fries Vectors</a></li>
+          </ul>
+          <br>
+        <p>Built by Shannan Bunch<br><a href="https://www.bunchofideas.com" target="_blank">BunchofIdeas</a></p>
+    </div>
+    </div>
+  </footer>
 
 </body>
 </html>

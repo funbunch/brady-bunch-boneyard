@@ -29,13 +29,16 @@ body {
   z-index: 1000;
   top: 210px;
 }
+audio {
+  visibility: hidden;
+}
 
 @keyframes ani{
 	0%{background-position: 100vw 0;}
 	100%{background-position: 0 0;}
 }
 
-canvas {
+.animation{
   border: 8px solid #ffffff;
   background:url(../imgs/cute-edit3.jpg) repeat-x 0 / 100% auto;
   animation: ani 5s linear infinite;
@@ -43,6 +46,16 @@ canvas {
   height: 500px;
   display: none;
 }
+
+.pausedFrame {
+  border: 8px solid #ffffff;
+  animation: ani none 0 ease 0 1 normal none running;
+  background:url(../imgs/cute-edit3.jpg) repeat-x 0 / 100% auto;
+  width: 714px;
+  height: 500px;
+  display: none;
+}
+
 h1 {
   /* font-family: 'Boogaloo', cursive; */
   font-family: 'Grandstander', cursive;
