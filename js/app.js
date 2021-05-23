@@ -9,11 +9,29 @@ const stats = document.getElementById('game-stats')
 const startGame = document.getElementById('start-game')
 const playAgain = document.getElementById('restartGame')
 const credits = document.getElementById('credits')
+const eatingSound = document.getElementById('eatingSound')
 let timer = document.getElementById('timer')
 let eating = new Audio('assets/dog-crunch.mp3')
 let panting = new Audio('assets/panting.mp3')
 const boneImgs = ['imgs/bone-1@2x.png','imgs/bone-2@2x.png','imgs/bone-3@2x.png']
 const badImgs = ['imgs/chicken-bone.png', 'imgs/leaf@2x.png', 'imgs/fries.png']
+
+let hasUserInteracted = false
+window.addEventListener('mouseenter', () => {
+  hasUserInteracted = true
+})
+// function playSound() {
+
+// } 
+// const data = {
+//   images: ["/imgs/corgi-sprite.png"],
+//   frames: {width:300, height:300},
+//   animations: {
+//       run:[0,78],
+//   }
+// }
+// const spriteSheet = new createjs.SpriteSheet(data);
+// const animation = new createjs.Sprite(spriteSheet, "run");
 
 // canvas setup / game state
 const c = canvas.getContext('2d')
@@ -24,7 +42,7 @@ canvas.height = 500;
 //timing vars
 let gameLoopInterval = setInterval(gameLoop, 75)
 let startTime
-
+// console.log(gameLoopInterval)
 
 //start screen 
 startGame.addEventListener('click', () => {
@@ -34,6 +52,8 @@ startGame.addEventListener('click', () => {
   //turn intro off
   gameIntro.style.display = 'none'
   startTime = 30
+  // eatingSound.play()
+  gameLoopInterval
 })
 
 //set up var to be able to clear countdown
@@ -153,8 +173,11 @@ function detectBoneCollection(currentBone) {
         bones.splice(currentBone, 1)
         //increment bonecollected
         currentBone.hit = true
-        // eating.play()
-        // panting.play()
+        // eating.muted = false
+        if (hasUserInteracted) {
+          eatingSound.play()
+        } 
+       
         //loop through array of bones at whatever index remove from array
         // for (let i = 0; i < bones.length; i++) {
         //   if (bones[i] === true) {
@@ -169,7 +192,7 @@ function detectBoneCollection(currentBone) {
        } else if (bonesCollected > 0) {
         bonesCollected--
        }
-      }  
+      } 
 }
 
 function displayScore() {
@@ -185,6 +208,8 @@ function winGame() {
   gameStatusDisplay.innerText = "You collected all the bones!!" 
   credits.style.display = 'flex'
   playAgain.style.display = "block"
+  eatingSound.pause()
+
  }
  function loseGame() {
   clearInterval(gameLoopInterval)
@@ -192,22 +217,38 @@ function winGame() {
   gameStatusDisplay.innerText = "Try again next time." 
   credits.style.display = 'flex'
   playAgain.style.display = "block"
+  eatingSound.pause()
  }
+
+ function resetGame() {
+  startTime = 30
+  bonesCollected = 0
+  eatingSound.pause()
+  location.reload()
+ }
+playAgain.addEventListener('click', resetGame)
+// startGame.addEventListener('click', gameLoop)
 
 //Game Functions
 function gameLoop() {
-  // Clear the canvas
-  c.clearRect(0, 0, canvas.width, canvas.height)
-  if (bonesCollected === 10 && startTime >= 0) {
-    winGame() 
-  } else if (bonesCollected < 10 && startTime <= 0 ) {
-   loseGame()
-  }
-  createRandomBones()
-  createRandomBadBones()
-  brady.render()
-  displayScore()
-  displayTimer()
+ 
+    eatingSound.pause()
+    // Clear the canvas
+   c.clearRect(0, 0, canvas.width, canvas.height)
+   if (bonesCollected === 10 && startTime >= 0) {
+     winGame() 
+   } else if (bonesCollected < 10 && startTime <= 0 ) {
+    loseGame()
+   }
+   // if (eatingSound.play) {
+   //   eatingSound.pause()
+   // }
+   createRandomBones()
+   createRandomBadBones()
+   brady.render()
+   displayScore()
+   displayTimer()
+
 }
 
 //list for keypress

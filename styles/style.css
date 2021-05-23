@@ -29,6 +29,9 @@ body {
   z-index: 1000;
   top: 210px;
 }
+audio {
+  visibility: hidden;
+}
 
 @keyframes ani{
 	0%{background-position: 100vw 0;}
